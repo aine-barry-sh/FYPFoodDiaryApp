@@ -8,10 +8,13 @@
 
 import UIKit
 import SystemConfiguration
+import MapKit
+import CoreLocation
 
-class MainViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MainViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
+    var locationManager = CLLocationManager()
     
     
     override func viewDidLoad() {
@@ -19,7 +22,14 @@ class MainViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         // Do any additional setup after loading the view, typically from a nib.
        
         
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
         
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
         
         
     }
@@ -102,5 +112,12 @@ class MainViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         let alert = UIAlertController(title: "Error message", message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        var userLocation:CLLocation = locations[0] as! CLLocation
+        let long = userLocation.coordinate.longitude
+        let lat = userLocation.coordinate.latitude
     }
 }

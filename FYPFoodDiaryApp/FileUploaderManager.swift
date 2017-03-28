@@ -7,9 +7,7 @@
 //
 
 import Foundation
-
-
-
+import UIKit
 import Alamofire
 
 
@@ -27,7 +25,6 @@ class FileUploaderManager {
         self.token = setToken
     
     }
-    
     
     
     func getFilesInDirectory() {

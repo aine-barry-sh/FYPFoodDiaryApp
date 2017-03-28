@@ -193,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				F378E0AA1E763BC000CE2CD0 /* JSONRepresentable.swift */,
+				F378E0AC1E763BC000CE2CD0 /* Dtos.swift */,
 				F378E0AD1E763BC000CE2CD0 /* Config.swift */,
 				F378E0AB1E763BC000CE2CD0 /* JSONSerializable.swift */,
 			);
@@ -226,7 +227,6 @@
 				F35235531E7EF48700491097 /* Utilities */,
 				F35235521E7EF46700491097 /* Controllers */,
 				F35235461E78731A00491097 /* logo.png */,
-				F378E0AC1E763BC000CE2CD0 /* Dtos.swift */,
 				F378E0AE1E763BC000CE2CD0 /* Requests.swift */,
 				F378E0A81E763BB100CE2CD0 /* SwiftyJSON.swift */,
 				F378E0541E76369A00CE2CD0 /* AppDelegate.swift */,
