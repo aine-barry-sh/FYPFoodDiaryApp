@@ -32,15 +32,15 @@ class SplashViewController: UIViewController {
         
         //for the sake of testing , always sending to main activity 
         
-        perform(#selector(redirectToMain), with: nil, afterDelay: 0)
+       // perform(#selector(redirectToMain), with: nil, afterDelay: 0)
         
-//        
-//        if (UserDefaults.standard.object(forKey: "access_token") != nil) {
-//            tokenIsPresent()
-//        } else {
-//            perform(#selector(redirectToLogin), with: nil, afterDelay: 0)
-//        }
-//        
+        
+        if (UserDefaults.standard.object(forKey: "access_token") != nil) {
+            tokenIsPresent()
+        } else {
+            perform(#selector(redirectToLogin), with: nil, afterDelay: 0)
+        }
+//
         
     }
     

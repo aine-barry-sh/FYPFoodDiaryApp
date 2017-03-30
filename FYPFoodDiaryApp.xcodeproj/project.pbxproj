@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F31719411E8CAF74002A454C /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31719401E8CAF74002A454C /* Observer.swift */; };
 		F35235471E78731A00491097 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F35235461E78731A00491097 /* logo.png */; };
 		F352354B1E7CC5E100491097 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = F352354A1E7CC5E100491097 /* Tools.swift */; };
 		F352354D1E7DD4E200491097 /* LogInRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F352354C1E7DD4E200491097 /* LogInRequest.swift */; };
@@ -125,6 +126,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F31719401E8CAF74002A454C /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		F35235461E78731A00491097 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = "Alamofire/../../ios-food-diary-app-master/logo.png"; sourceTree = SOURCE_ROOT; };
 		F352354A1E7CC5E100491097 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		F352354C1E7DD4E200491097 /* LogInRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInRequest.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				F352354A1E7CC5E100491097 /* Tools.swift */,
 				F352354C1E7DD4E200491097 /* LogInRequest.swift */,
 				F35235541E7F67C300491097 /* FileUploaderManager.swift */,
+				F31719401E8CAF74002A454C /* Observer.swift */,
 			);
 			path = FYPFoodDiaryApp;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				F352354F1E7E201F00491097 /* MainViewController.swift in Sources */,
 				F378E0AF1E763BC000CE2CD0 /* JSONRepresentable.swift in Sources */,
 				F35235511E7E2AA100491097 /* SplashViewController.swift in Sources */,
+				F31719411E8CAF74002A454C /* Observer.swift in Sources */,
 				F378E0A91E763BB100CE2CD0 /* SwiftyJSON.swift in Sources */,
 				F378E0B01E763BC000CE2CD0 /* JSONSerializable.swift in Sources */,
 				F378E0B21E763BC000CE2CD0 /* Config.swift in Sources */,

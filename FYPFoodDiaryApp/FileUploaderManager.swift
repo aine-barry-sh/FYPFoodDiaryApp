@@ -49,30 +49,41 @@ class FileUploaderManager {
     
     func sendSinglePicture(imageURL: URL) {
         
-        let headers: HTTPHeaders = [
-            "Content-type" : ConfigRoutes.CONTENT_TYPE_APPLICATION_JSON.rawValue,
-            "charset" : "utf-8",
-            "authorization": "bearer " + self.token
-        ]
-        
-        let parameters: Parameters = [
-            "Name" : "Default Name",
-            "Images" : [
-                "Name" : imageURL.lastPathComponent,
-                "Base64": self.imageToBase64(imageURL: imageURL)
-            ]
-        ]
-        
-        Alamofire.request(ConfigRoutes.MEALS_SAVE_IMAGE.rawValue, method: .post, parameters: parameters, headers:headers).responseJSON { response in
-            switch response.result
-            {
-            case .success(let data):
-                self.deleteFile(imageURL: imageURL)
-            case .failure(let error):
-                self.errorAlert(message: error.localizedDescription)
-                
-            }
-        }
+//        let headers: HTTPHeaders = [
+//            "Content-type" : ConfigRoutes.CONTENT_TYPE_APPLICATION_JSON.rawValue,
+//            "charset" : "utf-8",
+//            "authorization": "bearer " + self.token
+//        ]
+//        
+//      
+//        let imageFile = EncodedImageFile (
+//            Name: imageURL.lastPathComponent,
+//            Base64: imageToBase64(imageURL: imageURL)
+//        )
+//        let param = MealsSaveImagesDto(
+//            MealName: "Default Name",
+//            FoodItems:[],
+//            Images: [imageFile]
+//        )
+//        
+//        let parameters: Parameters = [
+//            "Name" : "Default Name",
+//            "Images" : [
+//                "Name" : imageURL.lastPathComponent,
+//                "Base64": self.imageToBase64(imageURL: imageURL)
+//            ]
+//        ]
+//        
+//        Alamofire.request(ConfigRoutes.MEALS_SAVE_IMAGE.rawValue, method: .post, parameters: param, encoding: .JSON, headers:headers).responseJSON { response in
+//            switch response.result
+//            {
+//            case .success(let data):
+//                self.deleteFile(imageURL: imageURL)
+//            case .failure(let error):
+//                self.errorAlert(message: error.localizedDescription)
+//                
+//            }
+//        }
         
         
     }

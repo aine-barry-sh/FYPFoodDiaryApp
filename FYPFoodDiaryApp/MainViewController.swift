@@ -10,11 +10,14 @@ import UIKit
 import SystemConfiguration
 import MapKit
 import CoreLocation
+import Alamofire
 
 class MainViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
-    var locationManager = CLLocationManager()
+    //var locationManager = CLLocationManager()
+    var imagePath : URL!
+    var imageData : Data!
     
     
     override func viewDidLoad() {
@@ -22,14 +25,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIImagePi
         // Do any additional setup after loading the view, typically from a nib.
        
         
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
+
         
         
     }
@@ -44,21 +40,19 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIImagePi
         // Dispose of any resources that can be recreated.
     }
 
+    
+    //Will not work on emulator because no camera. 
+    //Should trigger the error alert
     @IBAction func launchCameraButton(_ sender: Any) {
-        
-        
-        
-        
-        //taking over for testing
-//        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-//            let imagePicker = UIImagePickerController()
-//            imagePicker.delegate = self
-//            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
-//            imagePicker.allowsEditing = false
-//            self.present(imagePicker, animated: true, completion: nil)
-//        } else {
-//            errorAlert(message: "Was unable to access camera")
-//        }
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        } else {
+            errorAlert(message: "Was unable to access camera")
+        }
     }
     
     @IBAction func launchGalleryButton(_ sender: Any) {
@@ -77,7 +71,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIImagePi
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = image
-        } else{
+            let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(makeImageFileName())
+            self.imagePath = URL(fileURLWithPath: paths)
+            self.imageData = UIImageJPEGRepresentation(image, 0.5)
+        } else {
             errorAlert(message: "was unable to load selected image")
         }
         
@@ -90,22 +87,25 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIImagePi
     @IBAction func confirmPhotoButton(_ sender: Any) {
         
         saveImageDocumentDirectory()
-        
-        imageView.image = nil
-        
+
+        messageAlert(message: "Your will be uploaded at the best possible time!")
         
     }
     
     
+    
+    //inspired by http://stackoverflow.com/questions/40300703/swift-3-0-getting-url-of-uiimage-selected-from-uiimagepickercontroller
     func saveImageDocumentDirectory(){
         let fileManager = FileManager.default
-        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(makeImageFileName())
-        let image = imageView.image
-        print(paths)
-        let imageData = UIImageJPEGRepresentation(image!, 0.5)
-        fileManager.createFile(atPath: paths as String, contents: imageData, attributes: nil)
+        fileManager.createFile(atPath: self.imagePath.path, contents: self.imageData, attributes: nil)
+        imageView.image = nil
     }
     
+    func messageAlert(message:String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
     func errorAlert(message:String) {
         
         
@@ -113,11 +113,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate, UIImagePi
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-    
-    
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        var userLocation:CLLocation = locations[0] as! CLLocation
-        let long = userLocation.coordinate.longitude
-        let lat = userLocation.coordinate.latitude
-    }
+   
+   
 }

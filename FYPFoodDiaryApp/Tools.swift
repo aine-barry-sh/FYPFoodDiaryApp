@@ -86,3 +86,43 @@ func makeImageFileName() -> String {
     
     return "JPEG_iOS_" + dateString + ".jpg"
 }
+
+func filesArePresent() -> Bool {
+    
+    let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    
+    do {
+        // Get the directory contents urls (including subfolders urls)
+        let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil, options: []) as [URL]
+        
+        // if you want to filter the directory contents you can do like this:
+        let jpgFiles = directoryContents.filter{ $0.pathExtension == "jpg" }
+        for file in jpgFiles {
+            
+            if (file.lastPathComponent.range(of:"JPEG_iOS") != nil) {
+                return true
+            }
+        }
+    } catch let error as NSError {
+        print(error.localizedDescription)
+        return false
+    }
+    
+    return false
+
+}
+
+
+func dictToJSON(dict:[String: Any]) -> Any {
+    let jsonData = try! JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
+    let decoded = try! JSONSerialization.jsonObject(with: jsonData, options: [])
+    
+    return decoded
+}
+
+func arrayToJSON(array:[String]) -> Any {
+    let jsonData = try! JSONSerialization.data(withJSONObject: array, options: .prettyPrinted)
+    let decoded = try! JSONSerialization.jsonObject(with: jsonData, options: [])
+    return decoded
+}
+

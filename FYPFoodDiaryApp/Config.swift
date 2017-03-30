@@ -17,7 +17,7 @@ enum ConfigRoutes: String {
     case ACCOUNT_LOGOUT = "http://193.1.97.61:8080/api/Account/Logout"
     case ACCOUNT_CHANGE_PASSWORD = "http://193.1.97.61:8080/api/Account/ChangePassword"
     case ACCOUNT_VALIDATE_SESSION = "http://193.1.97.61:8080/api/Account/ValidateSession"
-    case MEALS_SAVE_IMAGE = "http://193.1.97.61:8080/api/Meals/SaveImageMeal"
+    case MEALS_SAVE_IMAGE = "http://193.1.97.61:8080/api/Meals/UploadImageMeal"
     case CONTENT_TYPE_TEXT_HTML = "text/html"
     case CONTENT_TYPE_APPLICATION_JSON = "application/json"
     case CONTENT_TYPE_MULTIPART_FORMDATA = "multipart/form-data; boundary="
